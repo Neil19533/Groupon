@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    List<Groupon.Models.GrouponData> Groupons = ((List<Groupon.Models.GrouponData>)Model).OrderBy(a=>a.TimeRemaining.TotalMilliseconds).ToList();
+    
+}
+
+
+<div class="row">
+
+
+
+    @foreach (var item in Groupons)
+    {
+        <div class="col-md-10 panel">
+            <h2>
+                <a href="@item.URL">@item.Title</a>
+            </h2>
+            <div class="col-md-5">
+                <img src="@item.Image" alt="@item.Title" class="img-responsive img-rounded" />
+                <p>Remaining Time: <b>@item.TimeRemaining.ToString(@"d\ \d\a\y\s\,\ hh\ \h\r\s\ mm\ \m\i\n\s")</b></p>
+            </div>
+            <div class="col-md-5">
+                @foreach (var itemv in item.Variations)
+                {
+                                  <p>
+                    Variation: <b>@itemv.Title</b>
+                </p>
+                <p>
+                    Sold: <b>@itemv.Sold</b>
+                </p>  
+                }
+
+            </div>
+        </div>
+
+    }
+
+
+</div>
